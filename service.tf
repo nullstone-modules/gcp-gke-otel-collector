@@ -1,4 +1,4 @@
-resource "kubernetes_service" "this" {
+resource "kubernetes_service_v1" "this" {
   lifecycle {
     ignore_changes = [metadata[0].annotations]
   }
@@ -38,5 +38,5 @@ resource "kubernetes_service" "this" {
 }
 
 locals {
-  service_endpoint = "http://${kubernetes_service.this.metadata[0].name}.${kubernetes_service.this.metadata[0].namespace}"
+  service_endpoint = "http://${kubernetes_service_v1.this.metadata[0].name}.${kubernetes_service_v1.this.metadata[0].namespace}"
 }

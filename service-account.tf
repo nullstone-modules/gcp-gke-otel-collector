@@ -3,7 +3,7 @@ resource "google_service_account" "this" {
   display_name = "Service Account for Nullstone Block ${local.block_name}"
 }
 
-resource "kubernetes_service_account" "this" {
+resource "kubernetes_service_account_v1" "this" {
   metadata {
     namespace = local.kubernetes_namespace
     name      = local.block_name
@@ -47,7 +47,7 @@ resource "google_project_iam_member" "this_trace_agent" {
   member  = "serviceAccount:${google_service_account.this.email}"
 }
 
-resource "kubernetes_cluster_role" "this" {
+resource "kubernetes_cluster_role_v1" "this" {
   metadata {
     name = local.resource_name
   }
@@ -71,7 +71,7 @@ resource "kubernetes_cluster_role" "this" {
   }
 }
 
-resource "kubernetes_cluster_role_binding" "this" {
+resource "kubernetes_cluster_role_binding_v1" "this" {
   metadata {
     name = local.resource_name
   }
@@ -79,12 +79,12 @@ resource "kubernetes_cluster_role_binding" "this" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.this.metadata[0].name
+    name      = kubernetes_cluster_role_v1.this.metadata[0].name
   }
 
   subject {
     kind      = "ServiceAccount"
-    name      = kubernetes_service_account.this.metadata[0].name
-    namespace = kubernetes_service_account.this.metadata[0].namespace
+    name      = kubernetes_service_account_v1.this.metadata[0].name
+    namespace = kubernetes_service_account_v1.this.metadata[0].namespace
   }
 }

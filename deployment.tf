@@ -1,4 +1,4 @@
-resource "kubernetes_deployment" "this" {
+resource "kubernetes_deployment_v1" "this" {
   metadata {
     name      = "collector"
     namespace = local.kubernetes_namespace
@@ -23,7 +23,7 @@ resource "kubernetes_deployment" "this" {
       }
 
       spec {
-        service_account_name = kubernetes_service_account.this.metadata[0].name
+        service_account_name = kubernetes_service_account_v1.this.metadata[0].name
 
         container {
           name              = "collector"
@@ -107,7 +107,7 @@ resource "kubernetes_deployment" "this" {
         volume {
           name = "collector-config"
           config_map {
-            name = kubernetes_config_map.this.metadata[0].name
+            name = kubernetes_config_map_v1.this.metadata[0].name
           }
         }
 

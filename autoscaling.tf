@@ -9,7 +9,7 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "this" {
     scale_target_ref {
       api_version = "apps/v1"
       kind        = "Deployment"
-      name        = kubernetes_deployment.this.metadata[0].name
+      name        = kubernetes_deployment_v1.this.metadata[0].name
     }
 
     min_replicas = var.min_replicas
