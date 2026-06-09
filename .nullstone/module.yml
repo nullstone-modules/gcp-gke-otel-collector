@@ -12,3 +12,6 @@ type: ""
 appCategories: []
 is_public: true
 tool_name: opentofu
+include:
+    - "collector.yml"
+source_url: https://github.com/nullstone-modules/gcp-gke-otel-collector

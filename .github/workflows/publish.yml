@@ -30,4 +30,4 @@ jobs:
       - id: publish
         name: Publish
         run: |
-          nullstone modules publish --version=${{ env.MODULE_VERSION }} --include=*.yml
+          nullstone modules publish --version=${{ env.MODULE_VERSION }}
