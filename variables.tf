@@ -1,6 +1,6 @@
 variable "collector_version" {
   type        = string
-  default     = "0.131.0"
+  default     = "0.144.0"
   description = <<EOF
 The version
 EOF
