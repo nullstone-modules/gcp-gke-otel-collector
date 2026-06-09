@@ -1,6 +1,6 @@
 output "kubernetes_namespace" {
   value       = local.kubernetes_namespace
-  description = "string ||| The name of the created namespace containing only this OpenTelemetry collector"
+  description = "string ||| The name of the namespace (from the connected cluster-namespace) where this OpenTelemetry collector runs"
 }
 
 output "grpc_endpoint" {
