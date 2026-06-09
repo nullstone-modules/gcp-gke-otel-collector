@@ -24,7 +24,10 @@ locals {
   // config maps share a filename.
   extender_config_maps_by_key = { for idx, cm in local.extender_config_maps : tostring(idx) => cm }
 
-  extender_mount_root = "/conf/extender"
+  // Must NOT be nested under /conf: that path is the read-only collector-config configMap volume,
+  // and kubelet cannot create a subdirectory inside it to land these mounts (the bind mount fails
+  // with "not a directory"). Keep this as its own top-level path.
+  extender_mount_root = "/conf-extender"
 
   // The namespace the extender created its config maps in (from its own cluster-namespace
   // connection). Used to validate it matches this collector's namespace. null when absent.

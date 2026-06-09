@@ -90,9 +90,9 @@ resource "kubernetes_deployment" "this" {
             read_only  = true
           }
 
-          // Mount each extender config map as a single file under /conf/extender via sub_path so
-          // multiple maps can share the directory without colliding. Requires each config map to
-          // store its fragment under a data key equal to "filename".
+          // Mount each extender config map as a single file under local.extender_mount_root via
+          // sub_path so multiple maps can share the directory without colliding.
+          // Requires each config map to store its fragment under a data key equal to "filename".
           dynamic "volume_mount" {
             for_each = local.extender_config_maps_by_key
             content {
